@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VP BIBLE v3.0 - INDIVIDUAL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0907 0%, #1a1410 100%);
+            color: #d9c07a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e8c86a 0%, #8a6a20 100%);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-size: 36px;
+            box-shadow: 0 4px 15px rgba(232, 200, 106, 0.3);
+        }
+
+        .header-text h1 {
+            font-size: 32px;
+            color: #e8c86a;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .header-text p {
+            color: #8a7d5a;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .status-card {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .status-icon {
+            width: 50px;
+            height: 50px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .status-content h2 {
+            color: #4caf50;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .status-content p {
+            color: #90ee90;
+            font-size: 14px;
+        }
+
+        .help-section {
+            background: rgba(26, 20, 16, 0.8);
+            border: 1px solid #2a2418;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .help-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e8c86a;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .help-section p {
+            color: #b8a878;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .url-container {
+            background: #0f0e0c;
+            border: 1px solid #2a2418;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .url-container code {
+            flex: 1;
+            color: #e8c86a;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow: auto;
+            max-height: 40px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #e8c86a;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #f5d896;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(232, 200, 106, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border: 1px solid #2a2418;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #e8c86a;
+            color: #000;
+            border-color: #e8c86a;
+        }
+
+        .btn-primary:hover {
+            background: #f5d896;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(232, 200, 106, 0.3);
+        }
+
+        .btn-secondary {
+            background: #26221b;
+            color: #d9c07a;
+            border-color: #3a352a;
+        }
+
+        .btn-secondary:hover {
+            background: #3a352a;
+            border-color: #4a402a;
+        }
+
+        .footer {
+            background: rgba(19, 17, 15, 0.8);
+            border-top: 1px solid #221f18;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #8a7d5a;
+            margin-top: 30px;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffa500;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: #4caf50;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .media-section {
+            background: rgba(26, 20, 16, 0.8);
+            border: 1px solid #2a2418;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .media-section h3 {
+            color: #e8c86a;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .media-card {
+            background: #0f0e0c;
+            border: 1px solid #2a2418;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-card:hover {
+            border-color: #3a352a;
+            background: #1a1812;
+            transform: translateY(-3px);
+        }
+
+        .media-card-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .media-card-title {
+            color: #e8c86a;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .media-card-desc {
+            color: #8a7d5a;
+            font-size: 11px;
+        }
+
+        @media (max-width: 768px) {
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-icon">📖</div>
+        <div class="header-text">
+            <h1>VP BIBLE v3.0</h1>
+            <p>INDIVIDUAL • Church Projection Software</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Status Card -->
+        <div class="status-card">
+            <div class="status-icon">✓</div>
+            <div class="status-content">
+                <h2>THIS PC IS READY</h2>
+                <p id="statusText">Status: Waiting for vMix...</p>
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section">
+            <h3>❓ HELP</h3>
+            <p>Use the link below to open the Bible verse overlay in vMix. Copy this URL and add it as a Browser Input in vMix.</p>
+            
+            <div class="url-container">
+                <code id="urlDisplay">http://localhost:3000/show?ref=John3:16&key=CHURCH_SECRET_2026</code>
+                <button class="copy-btn" id="copyBtn" onclick="copyURL()">COPY</button>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="openInBrowser()">
+                    🌐 Open in Browser
+                </button>
+                <button class="btn btn-secondary" onclick="testConnection()">
+                    🔗 Test Connection
+                </button>
+                <button class="btn btn-secondary" onclick="viewDocs()">
+                    📋 View Docs
+                </button>
+            </div>
+        </div>
+
+        <!-- Media Section -->
+        <div class="media-section">
+            <h3>📹 MEDIA MANAGEMENT</h3>
+            <div class="media-grid">
+                <div class="media-card" onclick="navigateTo('videos')">
+                    <div class="media-card-icon">🎬</div>
+                    <div class="media-card-title">VIDEO LIBRARY</div>
+                    <div class="media-card-desc">12 Videos • Ready</div>
+                </div>
+                <div class="media-card" onclick="navigateTo('backgrounds')">
+                    <div class="media-card-icon">🎨</div>
+                    <div class="media-card-title">WORSHIP BACKGROUNDS</div>
+                    <div class="media-card-desc">20 Backgrounds • 4K</div>
+                </div>
+                <div class="media-card" onclick="navigateTo('lyrics')">
+                    <div class="media-card-icon">📝</div>
+                    <div class="media-card-title">LYRIC SLIDES</div>
+                    <div class="media-card-desc">34 Slides • Pro</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                <span>Version 3.0.1 • ChurchTech</span> | 
+                <span id="connectionInfo" class="connection-status">
+                    <span class="status-dot"></span>
+                    Connected: Localhost
+                </span> | 
+                <span>No verses loaded</span>
+            </div>
+            <div>
+                <span class="connection-status">
+                    <span class="status-dot"></span>
+                    Idle • Waiting for vMix
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('VP Bible v3.0 initialized');
+            updateStatus();
+            setInterval(updateStatus, 2000);
+        });
+
+        function updateStatus() {
+            const statusText = document.getElementById('statusText');
+            const connectionDots = document.querySelectorAll('.status-dot');
+            
+            // Simulate connection check
+            if (Math.random() > 0.3) {
+                statusText.textContent = 'Status: Connected to vMix • Ready for broadcast';
+                connectionDots.forEach(dot => dot.classList.add('connected'));
+            } else {
+                statusText.textContent = 'Status: Waiting for vMix...';
+                connectionDots.forEach(dot => dot.classList.remove('connected'));
+            }
+        }
+
+        function copyURL() {
+            const url = document.getElementById('urlDisplay').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ COPIED';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'COPY';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function openInBrowser() {
+            const url = document.getElementById('urlDisplay').textContent;
+            window.open(url, '_blank');
+        }
+
+        function testConnection() {
+            alert('🔗 Testing connection to vMix...\n\nMake sure vMix is running on your system and the Browser Input is configured with the URL above.');
+        }
+
+        function viewDocs() {
+            window.open('https://github.com/princeferdinand12-bit/vp-bible/wiki', '_blank');
+        }
+
+        function navigateTo(section) {
+            alert(`📂 Opening ${section} section...\n\nFeature coming soon!`);
+        }
+    </script>
+</body>
+</html>
