@@ -1,0 +1,28 @@
+{
+  "name": "vp-bible",
+  "version": "2.4.1",
+  "description": "Professional Church Projection Software - Bible verses, worship media, and live streaming integration with vMix/OBS",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run electron\" \"npm run vite\"",
+    "vite": "vite",
+    "electron": "wait-on tcp:5173 && electron .",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron-build": "electron-builder"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "obs-websocket-js": "^5.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "vite": "^5.0.0",
+    "wait-on": "^7.0.1"
+  }
+}

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VP BIBLE - Help Center v2.4.1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0907 0%, #1a1410 100%);
+            color: #d9c07a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #2a2418;
+            padding-bottom: 30px;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .header-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e8c86a 0%, #8a6a20 100%);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+        }
+
+        .header h1 {
+            color: #e8c86a;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: #8a7d5a;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .help-badge {
+            display: inline-block;
+            background: #b8973a;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-card {
+            background: rgba(26, 20, 16, 0.8);
+            border: 1px solid #2a2418;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: #3a352a;
+            background: rgba(26, 20, 16, 0.95);
+            transform: translateY(-4px);
+        }
+
+        .section-card h2 {
+            color: #e8c86a;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .section-icon {
+            font-size: 24px;
+        }
+
+        .section-card p {
+            color: #b8a878;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .item-list {
+            list-style: none;
+        }
+
+        .item-list li {
+            color: #9a8a6a;
+            font-size: 13px;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .item-list li:before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #e8c86a;
+        }
+
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .shortcut-item {
+            background: #0f0e0c;
+            border: 1px solid #2a2418;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .shortcut-key {
+            background: #b8973a;
+            color: #000;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .shortcut-desc {
+            color: #8a7d5a;
+            font-size: 12px;
+        }
+
+        .tutorial-video {
+            background: #0f0e0c;
+            border: 1px solid #2a2418;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-video:hover {
+            border-color: #3a352a;
+            background: #1a1812;
+        }
+
+        .tutorial-icon {
+            width: 40px;
+            height: 40px;
+            background: #2a2722;
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+        }
+
+        .tutorial-info {
+            flex: 1;
+        }
+
+        .tutorial-title {
+            color: #e8c86a;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .tutorial-desc {
+            color: #8a7d5a;
+            font-size: 11px;
+        }
+
+        .tutorial-time {
+            color: #8a7d5a;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            background: #0f0e0c;
+            border: 1px solid #2a2418;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            border-color: #3a352a;
+            background: #1a1812;
+        }
+
+        .faq-question.active {
+            border-color: #e8c86a;
+            background: rgba(232, 200, 106, 0.1);
+        }
+
+        .faq-q-text {
+            color: #e8c86a;
+            font-weight: 700;
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: #8a7d5a;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            background: rgba(15, 14, 12, 0.8);
+            border: 1px solid #2a2418;
+            border-top: none;
+            padding: 15px;
+            border-radius: 0 0 6px 6px;
+            color: #b8a878;
+            font-size: 12px;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .install-section {
+            background: linear-gradient(135deg, #b8973a 0%, #8a6a20 100%);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            color: #000;
+            margin-bottom: 30px;
+        }
+
+        .install-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .install-section p {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .install-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .install-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background: rgba(19, 17, 15, 0.8);
+            border-top: 1px solid #221f18;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #8a7d5a;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #e8c86a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-btn {
+            background: #b8973a;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #e8c86a;
+        }
+
+        @media (max-width: 768px) {
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shortcut-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-logo">
+                <div class="header-logo-icon">❓</div>
+                <div>
+                    <h1>HELP & SUPPORT</h1>
+                </div>
+            </div>
+            <p>How can we help you today? — Version 2.4.1</p>
+        </div>
+
+        <!-- Help Badge -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="help-badge">🆘 HELP • UPDATED</span>
+        </div>
+
+        <!-- Sections Grid -->
+        <div class="sections-grid">
+            <!-- Voice Commands -->
+            <div class="section-card">
+                <h2><span class="section-icon">🎤</span> VOICE COMMANDS</h2>
+                <p>Say these to control the app hands-free</p>
+                <ul class="item-list">
+                    <li>"John 3:16" — Jump to verse John 3:16</li>
+                    <li>"Next verse" — Move to the next verse</li>
+                    <li>"Dark mode" — Toggle dark mode on/off</li>
+                    <li>"Search Psalms" — Search the book of Psalms</li>
+                    <li>"Search love faith hope" — Find passages</li>
+                </ul>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="section-card">
+                <h2><span class="section-icon">⌨️</span> KEYBOARD SHORTCUTS</h2>
+                <p>Speed up with these shortcuts</p>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl + K</span>
+                        <span class="shortcut-desc">Search scriptures</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl + B</span>
+                        <span class="shortcut-desc">Bookmark verse</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Space</span>
+                        <span class="shortcut-desc">Play/Pause audio</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">← / →</span>
+                        <span class="shortcut-desc">Previous/Next</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl + F</span>
+                        <span class="shortcut-desc">Find in Bible</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Esc</span>
+                        <span class="shortcut-desc">Close dialog</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial Videos -->
+            <div class="section-card">
+                <h2><span class="section-icon">▶️</span> TUTORIAL VIDEOS</h2>
+                <p>Learn the app in minutes</p>
+                <div class="tutorial-video" onclick="playVideo('getting-started')">
+                    <div class="tutorial-icon">▶️</div>
+                    <div class="tutorial-info">
+                        <div class="tutorial-title">Getting Started</div>
+                        <div class="tutorial-desc">Basics & Navigation</div>
+                    </div>
+                    <div class="tutorial-time">2:14</div>
+                </div>
+                <div class="tutorial-video" onclick="playVideo('study-notes')">
+                    <div class="tutorial-icon">▶️</div>
+                    <div class="tutorial-info">
+                        <div class="tutorial-title">How to Create a Study Note</div>
+                        <div class="tutorial-desc">Notes & Highlights</div>
+                    </div>
+                    <div class="tutorial-time">3:07</div>
+                </div>
+                <div class="tutorial-video" onclick="playVideo('sharing')">
+                    <div class="tutorial-icon">▶️</div>
+                    <div class="tutorial-info">
+                        <div class="tutorial-title">Sharing Verses with Others</div>
+                        <div class="tutorial-desc">Share & Export</div>
+                    </div>
+                    <div class="tutorial-time">1:42</div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="section-card">
+                <h2><span class="section-icon">❓</span> FAQ</h2>
+                <p>Common questions answered</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-q-text">How do I download Scripture for offline use?</span>
+                        <span class="faq-toggle">›</span>
+                    </div>
+                    <div class="faq-answer">
+                        VP Bible downloads Bible translations automatically for offline access. Go to Settings → Bible Translations → Download Offline Copies. Select your preferred version and it will download in the background.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-q-text">Can I highlight verses and add notes?</span>
+                        <span class="faq-toggle">›</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! Right-click any verse to highlight or add a note. Use Ctrl + B to bookmark. All notes sync across your devices if you're logged in to your VP Bible account.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-q-text">Is my data private and stored securely?</span>
+                        <span class="faq-toggle">›</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. All your personal notes, highlights, and bookmarks are encrypted and stored securely. We use industry-standard AES-256 encryption. Your data is never shared with third parties.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Install Section -->
+        <div class="install-section">
+            <h2>⬇️ INSTALL</h2>
+            <p>Download VP BIBLE for Windows</p>
+            <p style="font-size: 12px;">Compatible with Windows 10 & 11 • 64-bit • Free • Secure Installer</p>
+            <button class="install-btn" onclick="downloadApp()">↓ DOWNLOAD NOW</button>
+            <p style="margin-top: 15px; font-size: 11px;">🛡️ Signed & Verified • Offline Use Available</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>Still need help? Contact Support →</div>
+            <div class="footer-links">
+                <a href="mailto:support@vp.bible">support@vp.bible</a>
+                <span>•</span>
+                <a href="https://help.vp.bible/docs" target="_blank">help.vp.bible/docs</a>
+                <span>•</span>
+                <button class="contact-btn" onclick="openLiveChat()">💬 Open Live Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const question = element;
+            const answer = element.nextElementSibling;
+            
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        function playVideo(videoId) {
+            alert(`▶️ Playing video: ${videoId}\n\nOpening in video player...`);
+        }
+
+        function downloadApp() {
+            alert('⬇️ Downloading VP BIBLE v2.4.1...\n\nThe installer will begin shortly.');
+        }
+
+        function openLiveChat() {
+            alert('💬 Opening Live Chat...\n\nConnecting to support team. Please wait.');
+        }
+    </script>
+</body>
+</html>
