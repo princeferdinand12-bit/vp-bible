@@ -2,8 +2,32 @@
   "name": "vp-bible",
   "version": "2.4.1",
   "description": "Professional Church Projection Software - Bible verses, worship media, and live streaming integration with vMix/OBS",
+  "author": "princeferdinand12-bit",
+  "license": "MIT",
+  "homepage": "https://github.com/princeferdinand12-bit/vp-bible#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/princeferdinand12-bit/vp-bible"
+  },
+  "bugs": {
+    "url": "https://github.com/princeferdinand12-bit/vp-bible/issues"
+  },
+  "keywords": [
+    "electron",
+    "church",
+    "projection",
+    "bible",
+    "worship",
+    "streaming",
+    "vmix",
+    "obs"
+  ],
   "main": "main.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "start": "electron .",
     "dev": "concurrently \"npm run electron\" \"npm run vite\"",
@@ -11,11 +35,15 @@
     "electron": "wait-on tcp:5173 && electron .",
     "build": "vite build",
     "preview": "vite preview",
-    "electron-build": "electron-builder"
+    "electron-build": "electron-builder",
+    "lint": "eslint .",
+    "test": "vitest",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
+    "electron-updater": "^6.1.1",
     "obs-websocket-js": "^5.0.4"
   },
   "devDependencies": {
@@ -24,5 +52,19 @@
     "electron-builder": "^24.6.4",
     "vite": "^5.0.0",
     "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.vp-bible.app",
+    "productName": "VP Bible",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "princeferdinand12-bit",
+      "repo": "vp-bible"
+    }
   }
 }
